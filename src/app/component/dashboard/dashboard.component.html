@@ -21,3 +21,62 @@
         <div class="col"></div>
     </div>
 </div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <div class="card border-0 shadow p-3">
+                <div class="form-floating mb-3 tetx-center">
+                    <h5 class="text-center text-warning">Add Review</h5>
+                </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="movieName" name="movieName" [(ngModel)]="movieName">
+                        <label for="movieName">Movie name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="genre" name="genre" [(ngModel)]="genre">
+                        <label for="genre">Genre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="review" name="review" [(ngModel)]="review">
+                        <label for="review">Review</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="rating" name="rating" [(ngModel)]="rating">
+                        <label for="rating">Rating</label>
+                    </div>
+                    <button type="button" class="btn btn-outline-success" (click)="addReview()">Add Review</button>
+            </div>
+        </div>
+        <div class="col-md-8 mt-2">
+            <h5 class="text-danger"> Review List</h5>
+            <div class="card p-3 shadow">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">First name</th>
+                            <th scope="col">Last name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let reviews of reviewList">
+                            <td >{{reviews.movieName}}</td>
+                            <td>{{reviews.genre}}</td>
+                            <td>{{reviews.review}}</td>
+                            <td>{{reviews.rating}}</td>
+                            <td>
+                                <button class="btn btn-outline-danger" [disabled]="!canUserDelete(reviews)" (click)="deleteReview(reviews)">Delete</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

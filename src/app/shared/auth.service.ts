@@ -8,7 +8,18 @@ import { GoogleAuthProvider } from "@angular/fire/auth";
 })
 export class AuthService {
 
+  public userId: string| undefined;
+  
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
+
+  public getUserId(): void{
+    this.fireauth.currentUser.then(
+      user => {
+        this.userId = user?.uid;
+      }
+    )
+  }
+  
 
   public login(email: string, password: string):void{
     this.fireauth.signInWithEmailAndPassword(email, password).then((result) => {
