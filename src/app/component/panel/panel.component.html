@@ -1,0 +1,21 @@
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <div class="row">
+            <div class="col-sm">
+                <h5 class="mb-0">
+                {{review?.movieName}}
+                </h5>
+            </div>
+            <div class="col-sm"><p>Genre: {{review?.genre}}</p></div>
+            <div class="col-sm"><p>Rated: {{review?.rating}}</p></div>
+            <div *ngIf="canDelete" class="col-sm ">
+                <button class="btn btn-outline-danger delete" (click)="deleteReview()">Delete</button>
+            </div>
+        </div>    
+      </div>
+      <div aria-labelledby="headingOne">
+        <div class="card-body">
+            {{review?.review}}
+        </div>
+      </div>
+    </div>

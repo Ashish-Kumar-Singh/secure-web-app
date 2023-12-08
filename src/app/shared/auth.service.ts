@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { GoogleAuthProvider } from "@angular/fire/auth";
+import * as CryptoJS from 'crypto-js';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,9 @@ import { GoogleAuthProvider } from "@angular/fire/auth";
 export class AuthService {
 
   public userId: string| undefined;
-  
+
+  private loginError:Observable<boolean> = of(false);
+
   constructor(private fireauth: AngularFireAuth, private router: Router) { }
 
   public getUserId(): void{
@@ -19,10 +23,18 @@ export class AuthService {
       }
     )
   }
-  
+
+  public isLoginError():Observable<boolean>{
+    return this.loginError;
+  }
+
+  private sha1HashPasssword(password:string):string{
+    return CryptoJS.SHA1(password).toString();
+  }
+
 
   public login(email: string, password: string):void{
-    this.fireauth.signInWithEmailAndPassword(email, password).then((result) => {
+    this.fireauth.signInWithEmailAndPassword(email, this.sha1HashPasssword(password)).then((result) => {
       localStorage.setItem('token', 'true');
       if(result.user?.emailVerified){
         this.router.navigate(['dashboard']);
@@ -31,19 +43,17 @@ export class AuthService {
         this.router.navigate(['/verify']);
       }
     }, error => {
+      this.loginError = of(true);
       console.log(error);
-      alert('Something went wrong');
       this.router.navigate(['/login']);
     })
   }
 
   public register(email: string, password: string):void{
-    this.fireauth.createUserWithEmailAndPassword(email, password).then(() => {
-      alert('Registration successful');
+    this.fireauth.createUserWithEmailAndPassword(email, this.sha1HashPasssword(password)).then(() => {
       this.sendEmailVerification();
     }, error =>{
       console.log(error);
-      alert('Something went wrong');
       this.router.navigate(['/register']);
     })
   }

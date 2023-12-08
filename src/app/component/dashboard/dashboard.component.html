@@ -1,25 +1,8 @@
 <div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col"></div>
-        <div class="col-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <h4 class="text-dark text-muted">Welcome</h4>
-                        </div>
-                        <button type="button" class="btn btn-info" (click)="signout()">signout</button>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a href="/register" style="text-decoration: none;">Need Account ? <span class="text-danger">Register</span></a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col"></div>
-    </div>
+    <nav class="navbar navbar-light ">
+        <span class="navbar-brand mb-0 h1">Movie Reviews</span>
+        <button type="button" class="btn btn-info" (click)="signout()">signout</button>
+    </nav>
 </div>
 <div class="container-fluid">
 
@@ -38,43 +21,22 @@
                         <label for="genre">Genre</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="review" name="review" [(ngModel)]="review">
+                        <textarea class="form-control" rows="6" aria-label="With textarea" id="review" name="review" [(ngModel)]="review"></textarea>
                         <label for="review">Review</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="rating" name="rating" [(ngModel)]="rating">
+                        <input type="number" class="form-control" id="rating" name="rating" [(ngModel)]="rating">
                         <label for="rating">Rating</label>
                     </div>
                     <button type="button" class="btn btn-outline-success" (click)="addReview()">Add Review</button>
             </div>
         </div>
-        <div class="col-md-8 mt-2">
-            <h5 class="text-danger"> Review List</h5>
+        <div class="col-md-8 mt-5">
+            <h5 class="text-danger"> Reviews</h5>
             <div class="card p-3 shadow">
-                <div class="card-body">
-                    <table class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th scope="col">First name</th>
-                            <th scope="col">Last name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Mobile</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let reviews of reviewList">
-                            <td >{{reviews.movieName}}</td>
-                            <td>{{reviews.genre}}</td>
-                            <td>{{reviews.review}}</td>
-                            <td>{{reviews.rating}}</td>
-                            <td>
-                                <button class="btn btn-outline-danger" [disabled]="!canUserDelete(reviews)" (click)="deleteReview(reviews)">Delete</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
+                <div *ngFor="let reviews of reviewList"  class="accordion panel" id="accordionExample">
+                    <app-panel [review]="reviews" [canDelete]="canUserDelete(reviews)"></app-panel>
+                </div>     
             </div>
         </div>
     </div>

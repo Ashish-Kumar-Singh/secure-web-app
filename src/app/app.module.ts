@@ -11,6 +11,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PanelComponent } from './component/panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { ForgotPasswordComponent } from './component/forgot-password/forgot-pass
     RegisterComponent,
     DashboardComponent,
     VerifyEmailComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],

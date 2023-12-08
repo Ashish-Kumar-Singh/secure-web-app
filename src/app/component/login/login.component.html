@@ -10,16 +10,24 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" [(ngModel)]="email">
+                            <input type="email" class="form-control" name="email" [(ngModel)]="email" required >
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" [(ngModel)]="password">
+                            <input type="password" class="form-control" name="password" [(ngModel)]="password" required >
                           </div>
-                        <button type="button" class="btn btn-info" (click)="login()">Login</button>
+                          <div *ngIf="email!=='' &&!validateLogin()" class="mb-3">
+                            <p>Invalid Email</p>
+                          </div>
+                          <div *ngIf=" (message !=='') " class="mb-3">
+                            <p>{{message}}</p>
+                        </div>
+                          <div class="mb-3">
+                            <button type="button" class="btn btn-info" (click)="login()">Login</button>
+                          </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <a href="/register" style="text-decoration: none;">Need Account ? <span class="text-danger">Register</span></a>
+                            <div class="mb-3 col-md-6">
+                                <a href="/register" style="text-decoration: none;"> <span class="text-danger">Register</span></a>
                             </div>
                             <div class="col-md-6">
                                 <a href="/forgot" class="text-dark" style="text-decoration: none;"> Forgot Password ? </a>
@@ -29,7 +37,7 @@
                             <a (click)="signInWithGoogle()" style="text-decoration: none;cursor: pointer;">
                                 <div class="card shadow text-center">
                                     <div class="card-body">
-                                        <img src="../../../assets/google.png" alt="" height="24px" width="24px"> Sign In with Google
+                                        Sign In with Google
                                     </div>
                                 </div>
                             </a>
