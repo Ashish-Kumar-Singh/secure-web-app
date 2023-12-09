@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PanelComponent } from './panel.component';
 import { DataService } from 'src/app/shared/data.service';
+import { Review } from 'src/app/model/review';
 
 describe('PanelComponent', () => {
   let component: PanelComponent;
@@ -27,5 +28,12 @@ describe('PanelComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call delete Review', () => {
+    component.review = {} as Review;
+    component.deleteReview();
+    expect(dataStoreSpy.deleteReview).toHaveBeenCalled();
+    expect(dataStoreSpy.deleteReview).toHaveBeenCalledWith({});
   });
 });

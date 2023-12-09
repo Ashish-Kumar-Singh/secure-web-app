@@ -37,4 +37,12 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call email and password validation when register is called', () => {
+    component.email = "as@as.com"
+    component.password = "P@ssword12"
+    component.register();
+    expect(utilsSpy.isValidEmail).toHaveBeenCalled();
+    expect(utilsSpy.isPasswordCorrect).toHaveBeenCalled();
+  });
 });

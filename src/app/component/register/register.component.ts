@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       // truthy check or numeric condition
       if (numPwns) {
         this.erorMessage = `Please use a stronger password, this password was found breached ${numPwns} times`
-      } else if(this.validateLogin()){
+      } else if(this.validateRegister()){
         this.isEmailValid= true;
         this.isPasswordValid = true;
         this.erorMessage='';
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
     this.isPasswordValid = this.utils.isPasswordCorrect(this.password);
   }
 
-  public validateLogin(): boolean{
+  private validateRegister(): boolean{
     return (this.isEmailValid && this.isPasswordValid)
   }
 
