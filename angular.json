@@ -63,6 +63,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "ssl": true,
+            "sslKey": "D:/Masters/CAs/keys/key.pem",
+            "sslCert": "D:/Masters/CAs/keys/cert.pem"
+          },
           "configurations": {
             "production": {
               "browserTarget": "secure-web-app:build:production"

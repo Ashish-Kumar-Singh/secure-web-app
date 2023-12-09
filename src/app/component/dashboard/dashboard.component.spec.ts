@@ -14,9 +14,6 @@ describe('DashboardComponent', () => {
   const returnMockData = {
     data:'test'
   }
-  const dataSpy = jasmine.createSpyObj({
-    valueChanges: of(returnMockData)
-  })
   
   const authSpy = jasmine.createSpyObj('AuthService', [
     'logout','userId','getUserId'
