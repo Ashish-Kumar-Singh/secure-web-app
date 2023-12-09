@@ -10,6 +10,10 @@ export class Utils{
         return emailRegex.test(email);
     }
 
+    public hasHTMLTags(input:string):boolean{
+        return /<[a-z][\s\S]*>/i.test(input);
+    }
+
     public isPasswordCorrect(password: string):boolean{
         const minLength = 8;
         const hasUppercase = /[A-Z]/.test(password);

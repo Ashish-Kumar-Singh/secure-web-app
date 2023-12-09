@@ -40,4 +40,16 @@ describe('Utils', () => {
     expect(result).toBe(true);
   });
 
+  it('Should return false if valid input', () => {
+    const password = "hello"
+    const result = utils.hasHTMLTags(password);
+    expect(result).toBe(false);
+  });
+
+  it('Should return true if html tags in input', () => {
+    const password = "<p>hello</p>"
+    const result = utils.hasHTMLTags(password);
+    expect(result).toBe(true);
+  });
+
 });

@@ -13,20 +13,23 @@
                     <h5 class="text-center text-warning">Add Review</h5>
                 </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="movieName" name="movieName" [(ngModel)]="movieName">
+                        <input type="text" class="form-control" id="movieName" name="movieName" [(ngModel)]="movieName" pattern="^[^<>]+$">
                         <label for="movieName">Movie name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="genre" name="genre" [(ngModel)]="genre">
+                        <input type="text" class="form-control" id="genre" name="genre" [(ngModel)]="genre" pattern="^[^<>]+$">
                         <label for="genre">Genre</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" rows="6" aria-label="With textarea" id="review" name="review" [(ngModel)]="review"></textarea>
+                        <textarea class="form-control" rows="6" aria-label="With textarea" id="review" name="review" [(ngModel)]="review" pattern="^[^<>]+$"></textarea>
                         <label for="review">Review</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control" id="rating" name="rating" [(ngModel)]="rating">
                         <label for="rating">Rating</label>
+                    </div>
+                    <div class="form-floating mb-3" *ngIf="hasHtmlTags">
+                        No HTML tags allowed 
                     </div>
                     <button type="button" class="btn btn-outline-success" (click)="addReview()">Add Review</button>
             </div>

@@ -14,7 +14,7 @@ export class AuthService {
 
   private loginError:Observable<boolean> = of(false);
 
-  constructor(private fireauth: AngularFireAuth, private router: Router) { }
+  constructor(private fireauth: AngularFireAuth, private router: Router) {}
 
   public getUserId(): void{
     this.fireauth.currentUser.then(
@@ -35,7 +35,6 @@ export class AuthService {
 
   public login(email: string, password: string):void{
     this.fireauth.signInWithEmailAndPassword(email, this.sha1HashPasssword(password)).then((result) => {
-      localStorage.setItem('token', 'true');
       if(result.user?.emailVerified){
         this.router.navigate(['dashboard']);
       }
@@ -81,7 +80,6 @@ export class AuthService {
   public googleSignIn(){
     return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(result => {
       this.router.navigate(['/dashboard']);
-      localStorage.setItem('token', JSON.stringify(result.user?.uid));
     }, error => {
       console.log(error)
     })
@@ -89,7 +87,6 @@ export class AuthService {
 
   public logout():void {
     this.fireauth.signOut().then(() =>{
-      localStorage.removeItem('token');
       this.router.navigate(['/login']);
     })
   }
