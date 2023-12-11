@@ -1,9 +1,21 @@
-<div class="container-fluid">
-    <nav class="navbar navbar-light ">
-        <span class="navbar-brand mb-0 h1">Movie Reviews</span>
-        <button type="button" class="btn btn-info" (click)="signout()">signout</button>
-    </nav>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/dashboard">Movie Reviews</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-outline-success" type="submit" (click)="signout()">signout</button>
+        </form>
+      </div>
+    </div>
+  </nav>
 <div class="container-fluid">
 
     <div class="row">
@@ -35,19 +47,18 @@
             </div>
         </div>
         <div class="col-md-8 mt-5">
-            <h5 class="text-danger"> Reviews</h5>
             <div class="card p-3 shadow">
                 <div *ngFor="let reviews of reviewList"  class="accordion panel" id="accordionExample">
                     <app-panel [review]="reviews" [canDelete]="false"></app-panel>
                 </div>     
             </div>
-        </div>
-        <div *ngIf="userList.length > 0" class="col-md-8 mt-5">
-            <h5 class="text-danger">My Reviews</h5>
-            <div class="card p-3 shadow">
-                <div *ngFor="let review of userList"  class="accordion panel" id="accordionExample">
-                    <app-panel [review]="review" [canDelete]="canUserDelete(review)"></app-panel>
-                </div>     
+            <div *ngIf="userList.length > 0" class="addCard" >
+                <h5 class="text-danger">My Reviews</h5>
+                <div class="card p-3 shadow">
+                    <div *ngFor="let review of userList"  class="accordion panel" id="accordionExample">
+                        <app-panel [review]="review" [canDelete]="canUserDelete(review)"></app-panel>
+                    </div>     
+                </div>
             </div>
         </div>
     </div>
