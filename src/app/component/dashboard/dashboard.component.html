@@ -38,7 +38,15 @@
             <h5 class="text-danger"> Reviews</h5>
             <div class="card p-3 shadow">
                 <div *ngFor="let reviews of reviewList"  class="accordion panel" id="accordionExample">
-                    <app-panel [review]="reviews" [canDelete]="canUserDelete(reviews)"></app-panel>
+                    <app-panel [review]="reviews" [canDelete]="false"></app-panel>
+                </div>     
+            </div>
+        </div>
+        <div *ngIf="userList.length > 0" class="col-md-8 mt-5">
+            <h5 class="text-danger">My Reviews</h5>
+            <div class="card p-3 shadow">
+                <div *ngFor="let review of userList"  class="accordion panel" id="accordionExample">
+                    <app-panel [review]="review" [canDelete]="canUserDelete(review)"></app-panel>
                 </div>     
             </div>
         </div>

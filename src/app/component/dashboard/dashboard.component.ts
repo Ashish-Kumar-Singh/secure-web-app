@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
 
   public reviewList: Review [] = [];
 
+  public userList: Review [] = [];
+
   public movieName: string = '';
   public genre: string = '';
   public review: string = '';
@@ -52,9 +54,22 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  private getUserReviews(data:any):void {
+    this.userList = data.filter((object: any) => {
+      const reviewData = object.payload.doc.data();
+      reviewData.id = object.payload.doc.id;
+      return reviewData.User == this.auth.userId
+    }).map((object:any) => {
+      const userData = object.payload.doc.data();
+      userData.id = object.payload.doc.id;
+      return userData
+    })
+  }
+
   private getAllReviews():void {
     this.dataService.getAllReviews().subscribe((data:any) => {
       if(data){
+        this.getUserReviews(data)
         this.mapData(data);
       }
     }, (error:any) => {
