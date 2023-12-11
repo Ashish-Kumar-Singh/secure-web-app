@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public signout():void{
+    console.log("Logging user out")
     this.auth.logout();
   }
 
@@ -83,7 +84,7 @@ export class DashboardComponent implements OnInit {
       this.resetForm();
     }
     else{
-      console.error("Invalid HTML tags found in input");
+      console.warn("Invalid HTML tags found in input");
     }
   }
 

@@ -17,6 +17,7 @@ export class AuthService {
   constructor(private fireauth: AngularFireAuth, private router: Router) {}
 
   public getUserId(): void{
+    console.log("Rertreiving User Id");
     this.fireauth.currentUser.then(
       user => {
         this.userId = user?.uid;
@@ -43,7 +44,7 @@ export class AuthService {
       }
     }, error => {
       this.loginError = of(true);
-      console.log(error);
+      console.error("Error logging in the user " + error);
       this.router.navigate(['/login']);
     })
   }
@@ -52,7 +53,7 @@ export class AuthService {
     this.fireauth.createUserWithEmailAndPassword(email, this.sha1HashPasssword(password)).then(() => {
       this.sendEmailVerification();
     }, error =>{
-      console.log(error);
+      console.error("Error registering the user " + error);
       this.router.navigate(['/register']);
     })
   }
@@ -63,7 +64,8 @@ export class AuthService {
         user.sendEmailVerification().then((result:any) => {
           this.router.navigate(['/verify']);
         }, (error:any) =>{
-          console.log(error);
+          console.error("Error sending verification email " + error);
+          console.error(error);
         });
       }
     })
@@ -73,7 +75,8 @@ export class AuthService {
     this.fireauth.sendPasswordResetEmail(email).then(() => {
     this.router.navigate(['/login']);
     },error => {
-      console.log(error);
+      console.error("Error sending recovery email " + error);
+      console.error(error);
     })
   }
 

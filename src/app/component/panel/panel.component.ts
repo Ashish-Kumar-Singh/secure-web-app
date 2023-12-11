@@ -7,16 +7,13 @@ import { DataService } from 'src/app/shared/data.service';
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss']
 })
-export class PanelComponent implements OnInit {
+export class PanelComponent {
 
   @Input() review: Review | undefined;
 
   @Input() canDelete: boolean = false;
 
   constructor(private dataService:DataService) { }
-
-  ngOnInit(): void {
-  }
 
   public deleteReview(): void{
     //Add confirmation

@@ -7,7 +7,7 @@ import { Utils } from 'src/app/shared/utils';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   public email: string = '';
   public password: string = '';
@@ -17,13 +17,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth:AuthService, private utils: Utils) { }
 
-  ngOnInit(): void {
-  } 
-
   public login():void{
     if (this.validateLogin()) {
       this.auth.login(this.email,this.password);
       this.auth.isLoginError()?.subscribe(error => {
+        console.warn("Invalid Username/Password");
         this.message = "Invalid Username/Password"});
   } else {
     console.error("Email or Password Invalid");

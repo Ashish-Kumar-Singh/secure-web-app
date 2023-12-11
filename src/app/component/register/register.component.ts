@@ -8,7 +8,7 @@ import { Utils } from 'src/app/shared/utils';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   
   public email: string = '';
   public password: string = '';
@@ -19,18 +19,14 @@ export class RegisterComponent implements OnInit {
 
   public erorMessage:string ='';
 
-  private isPasswordBreached:boolean = false;
-
   constructor(private auth:AuthService, private utils: Utils) { }
-
-  ngOnInit(): void {
-  }
 
   private async checkPasswordBreached(password:string):Promise<void>{
     try {
       const numPwns = await pwnedPassword(password);
       // truthy check or numeric condition
       if (numPwns) {
+        console.warn("User chose a weak password");
         this.erorMessage = `Please use a stronger password, this password was found breached ${numPwns} times`
       } else if(this.validateRegister()){
         this.isEmailValid= true;

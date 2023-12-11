@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './verify-email.component.html',
   styleUrls: ['./verify-email.component.scss']
 })
-export class VerifyEmailComponent implements OnInit {
+export class VerifyEmailComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
