@@ -24,6 +24,7 @@ export class LoginComponent {
         console.warn("Invalid Username/Password");
         this.message = "Invalid Username/Password"});
   } else {
+    this.message = "Invalid Username/Password";
     console.error("Email or Password Invalid");
   }
   }

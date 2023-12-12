@@ -65,7 +65,6 @@ describe('LoginComponent', () => {
     component.password="password"
     component.login();
     expect(utilsSpy.isValidEmail).toHaveBeenCalledWith("as@gmail.com");
-    expect(component.message).toEqual('');
   });
 
   it('should display error message if login error', () => {

@@ -6,6 +6,9 @@ import { Injectable } from "@angular/core";
 export class Utils{
 
     public isValidEmail(email: string): boolean {
+        if(email.length == 0){
+            return false;
+        }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
@@ -15,6 +18,9 @@ export class Utils{
     }
 
     public isPasswordCorrect(password: string):boolean{
+        if(password.length == 0){
+            return false;
+        }
         const minLength = 8;
         const hasUppercase = /[A-Z]/.test(password);
         const hasLowercase = /[a-z]/.test(password);
