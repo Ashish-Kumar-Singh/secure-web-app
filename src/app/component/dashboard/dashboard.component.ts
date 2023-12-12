@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Review } from 'src/app/model/review';
 import { AuthService } from 'src/app/shared/auth.service';
 import { DataService } from 'src/app/shared/data.service';
+import { LoggerService } from 'src/app/shared/logger.service';
 import { Utils } from 'src/app/shared/utils';
 
 @Component({
@@ -24,7 +25,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private auth:AuthService,
      private dataService: DataService,
-     private utils:Utils) { }
+     private utils:Utils,
+     private loggerService: LoggerService) { }
 
   ngOnInit(): void {
     this.auth.getUserId();
@@ -32,7 +34,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public signout():void{
-    console.log("Logging user out")
+    this.loggerService.info("Logging user out");
     this.auth.logout();
   }
 
@@ -55,6 +57,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private getUserReviews(data:any):void {
+    this.loggerService.info("Retreiving data");
     this.userList = data.filter((object: any) => {
       const reviewData = object.payload.doc.data();
       reviewData.id = object.payload.doc.id;
@@ -73,6 +76,7 @@ export class DashboardComponent implements OnInit {
         this.mapData(data);
       }
     }, (error:any) => {
+      this.loggerService.error("Error retreiving data");
       console.error(error);
     })
   }
@@ -88,6 +92,7 @@ export class DashboardComponent implements OnInit {
     //Add form check
     this.onUserInput();
     if(!this.hasHtmlTags){
+      this.loggerService.info("Adding review")
       this.dataService.addReview({
         movieName: this.movieName,
         genre: this.genre,
@@ -99,13 +104,9 @@ export class DashboardComponent implements OnInit {
       this.resetForm();
     }
     else{
+      this.loggerService.warn("Invalid HTML tags found in input");
       console.warn("Invalid HTML tags found in input");
     }
-  }
-
-  public deleteReview(review: Review): void{
-    //Add confirmation
-    this.dataService.deleteReview(review);
   }
 
 }

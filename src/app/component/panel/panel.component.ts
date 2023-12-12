@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Review } from 'src/app/model/review';
 import { DataService } from 'src/app/shared/data.service';
+import { LoggerService } from 'src/app/shared/logger.service';
 
 @Component({
   selector: 'app-panel',
@@ -13,11 +14,12 @@ export class PanelComponent {
 
   @Input() canDelete: boolean = false;
 
-  constructor(private dataService:DataService) { }
+  constructor(private dataService:DataService, private logger:LoggerService) { }
 
   public deleteReview(): void{
     //Add confirmation
     if(this.review){
+      this.logger.info("Deleting record")
       this.dataService.deleteReview(this.review);
     }
   }

@@ -6,6 +6,7 @@ import { DataService } from 'src/app/shared/data.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Review } from 'src/app/model/review';
+import { LoggerService } from 'src/app/shared/logger.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -17,6 +18,10 @@ describe('DashboardComponent', () => {
   
   const authSpy = jasmine.createSpyObj('AuthService', [
     'logout','userId','getUserId'
+  ])
+
+  const logSpy = jasmine.createSpyObj('LoggerService', [
+    'info','warn','error'
   ])
 
 
@@ -32,6 +37,7 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
       providers: [
+        {provide: LoggerService, useValue: logSpy},
         {provide: DataService, useValue: dataStoreSpy},
         {provide:AuthService, useValue:authSpy},
       ],
