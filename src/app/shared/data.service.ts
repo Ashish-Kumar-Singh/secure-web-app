@@ -21,4 +21,9 @@ export class DataService {
     return this.angularFireStore.doc('/Reviews/' + review.id).delete();
   }
 
+  public updateReview(review:any): any{
+    this.deleteReview(review);
+    this.addReview(review);
+  }
+
 }

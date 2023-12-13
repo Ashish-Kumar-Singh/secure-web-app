@@ -5,7 +5,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <form>
-                        <div class="mb-3">
+                        <div class="mb-3 header">
                             <h4 class="text-dark text-muted">Regsiter</h4>
                         </div>
                         <div class="mb-3">
@@ -25,7 +25,7 @@
                         <div *ngIf=" (erorMessage !=='') " class="mb-3">
                             <p>{{erorMessage}}</p>
                         </div>
-                        <button type="button" class="btn btn-info" (click)="register()">Register</button>
+                        <button type="button" class="btn btn-info wideButton" (click)="register()">Register</button>
                         <div class="row">
                             <div class="col-md-6">
                                 <a href="/login" style="text-decoration: none;">Already Account ? <span class="text-danger">Login</span></a>

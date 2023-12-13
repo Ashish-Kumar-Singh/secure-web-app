@@ -8,14 +8,35 @@
             </div>
             <div class="col-sm"><p>Genre: {{review?.genre}}</p></div>
             <div class="col-sm"><p>Rated: {{review?.rating}}</p></div>
-            <div *ngIf="canDelete" class="col-sm ">
-                <button class="btn btn-outline-danger delete" (click)="deleteReview()">Delete</button>
+            <div *ngIf="canDelete && !deletePanel" class="col-sm ">
+                <button class="btn btn-outline-danger delete" (click)="showDeletePanel()">Delete</button>
+            </div>
+            <div *ngIf="!isEditable && canDelete" class="col-sm ">
+              <button class="btn btn-outline-success" (click)="enableEdit()">Edit</button>
+          </div>
+            <div *ngIf="deletePanel" class="col-sm ">
+              <button class="btn btn-outline-danger" (click)="deleteReview()">Yes</button>
+            </div>
+            <div *ngIf="deletePanel" class="col-sm ">
+              <button class="btn btn-outline-success" (click)="showDeletePanel()">No</button>
             </div>
         </div>    
       </div>
       <div aria-labelledby="headingOne">
+        <div class="row">
+          <div *ngIf="isEditable" class="col-sm ">
+            <button class="btn btn-outline-danger" (click)="updateReview()">Save</button>
+          </div>
+          <div *ngIf="isEditable" class="col-sm ">
+            <button class="btn btn-info" (click)="enableEdit()">No</button>
+          </div>
+        </div>
         <div class="card-body">
             {{review?.review}}
+            <input *ngIf="isEditable" [(ngModel)]="editReview" type="text" class="form-control"/>
         </div>
+        <div class="form-floating mb-3" *ngIf="hasHtmlTags">
+          No HTML tags allowed 
+      </div>
       </div>
     </div>
