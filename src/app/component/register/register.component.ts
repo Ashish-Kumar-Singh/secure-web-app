@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { pwnedPassword } from 'hibp';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Utils } from 'src/app/shared/utils';
