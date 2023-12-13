@@ -6,14 +6,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 describe('LoggerService', () => {
   let service: LoggerService;
 
-  const angularFirestoreMock = {
-    createId:jasmine.createSpy('createId').and.returnValue('id'),
+  const firestoreMock = {
     collection: jasmine.createSpy('collection').and.returnValue({
-      add: jasmine.createSpy('add').and.returnValue(Promise.resolve()),
-      snapshotChanges: jasmine.createSpy('add').and.returnValue(Promise.resolve()),
-    }),
-    doc: jasmine.createSpy('doc').and.returnValue({
-      delete: jasmine.createSpy('delete').and.returnValue(Promise.resolve()),
+      add: jasmine.createSpy('add').and.returnValue(Promise.resolve())
     }),
   };
 
@@ -21,7 +16,7 @@ describe('LoggerService', () => {
     TestBed.configureTestingModule({
       providers:[
         LoggerService,
-        {provide: AngularFirestore, useValue: angularFirestoreMock} 
+        {provide: AngularFirestore, useValue: firestoreMock} 
         
       ]
     });
