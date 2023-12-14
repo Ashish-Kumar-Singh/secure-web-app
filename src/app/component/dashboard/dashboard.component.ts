@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   public genre: string = '';
   public review: string = '';
   public rating: string = '';
+  public message:string = '';
 
   public hasHtmlTags:boolean =false;
 
@@ -89,19 +90,24 @@ export class DashboardComponent implements OnInit {
   }
 
   public addReview(): void{
-    //Add form check
     this.onUserInput();
     if(!this.hasHtmlTags){
-      this.loggerService.info("Adding review")
-      this.dataService.addReview({
-        movieName: this.movieName,
-        genre: this.genre,
-        review: this.review,
-        rating: this.rating,
-        User: this.auth.userId ?? '',
-        id: ''
-      });
-      this.resetForm();
+      console.log(this.movieName)
+      if(this.movieName == '' || this.review == '' || this.genre ==''|| this.rating == ''){
+        this.message = "Feilds cannot be empty"
+      }else{
+        this.loggerService.info("Adding review")
+        this.dataService.addReview({
+          movieName: this.movieName,
+          genre: this.genre,
+          review: this.review,
+          rating: this.rating,
+          User: this.auth.userId ?? '',
+          id: ''
+        });
+        this.resetForm();
+        this.message='';
+      }
     }
     else{
       this.loggerService.warn("Invalid HTML tags found in input");

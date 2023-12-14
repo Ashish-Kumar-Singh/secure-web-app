@@ -95,16 +95,30 @@ describe('DashboardComponent', () => {
   it('should run input vlidation before submitting', () => {
     authSpy.userId = ('1234')
     component.genre = "sci-fi"
+    component.movieName = "sci-fi"
+    component.review = "sci-fi"
+    component.rating = "sci-fi"
     component.addReview();
     expect(component.hasHtmlTags).toBe(false)
     expect(dataStoreSpy.addReview).toHaveBeenCalled();
     expect(dataStoreSpy.addReview).toHaveBeenCalledWith({
       User: '1234',
       id: '',
-      movieName: '',
+      movieName: 'sci-fi',
       genre: 'sci-fi',
-      review: '',
-      rating: ''
+      review: 'sci-fi',
+      rating: 'sci-fi'
     });
+  });
+
+  it('should show warning if a feild is empty', () => {
+    authSpy.userId = ('1234')
+    component.genre = ""
+    component.movieName = "sci-fi"
+    component.review = "sci-fi"
+    component.rating = "sci-fi"
+    component.addReview();
+    expect(component.hasHtmlTags).toBe(false)
+    expect(component.message).toBe( "Feilds cannot be empty");
   });
 });

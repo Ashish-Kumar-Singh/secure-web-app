@@ -43,6 +43,9 @@
                     <div class="form-floating mb-3" *ngIf="hasHtmlTags">
                         No HTML tags allowed 
                     </div>
+                    <div class="form-floating mb-3" *ngIf="message.length > 0">
+                        {{message}}
+                    </div>
                     <button type="button" class="btn btn-outline-success" (click)="addReview()">Add Review</button>
             </div>
         </div>
